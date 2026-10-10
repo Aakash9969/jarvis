@@ -1,0 +1,41 @@
+@echo off
+title JARVIS - Desktop Assistant
+cd /d "%~dp0"
+
+:: ============================================
+:: JARVIS Launcher Template
+:: Copy this file to start_jarvis.bat and add
+:: your own API key below.
+:: ============================================
+
+:: Get a free NVIDIA API key at https://build.nvidia.com/
+set JARVIS_API_KEY=YOUR_API_KEY_HERE
+set JARVIS_BASE_URL=https://integrate.api.nvidia.com/v1
+set JARVIS_MODEL=nvidia/nemotron-3-super-120b-a12b
+
+:: To use OpenAI instead:
+:: set JARVIS_API_KEY=sk-your-openai-key
+:: set JARVIS_BASE_URL=https://api.openai.com/v1
+:: set JARVIS_MODEL=gpt-4o-mini
+
+:: To use Groq (free, fast):
+:: set JARVIS_API_KEY=gsk-your-groq-key
+:: set JARVIS_BASE_URL=https://api.groq.com/openai/v1
+:: set JARVIS_MODEL=llama-3.3-70b-versatile
+
+echo.
+echo   ================================================================
+echo    J A R V I S  -  Desktop Assistant
+echo   ================================================================
+echo    Model: %JARVIS_MODEL%
+echo    Starting...
+echo   ================================================================
+echo.
+
+python run.py --no-browser
+
+if errorlevel 1 (
+    echo.
+    echo   JARVIS stopped with an error. Press any key to close.
+    pause >nul
+)

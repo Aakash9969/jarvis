@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Test</title>
+<style>
+body { font-family: Arial; background: #111; color: white; padding: 40px; }
+input { padding: 10px; font-size: 16px; width: 300px; }
+#result { margin-top: 20px; color: #4fd6ff; }
+</style>
+</head>
+<body>
+<h2>Input Test</h2>
+<p>If you can type below and press Enter, the page works:</p>
+<input type="text" id="test" placeholder="Type here and press Enter">
+<div id="result"></div>
+<script>
+document.getElementById('test').addEventListener('keydown', function(e) {
+  if (e.key === 'Enter') {
+    document.getElementById('result').textContent = 'You typed: ' + this.value;
+    this.value = '';
+  }
+});
+document.getElementById('test').focus();
+</script>
+</body>
+</html>

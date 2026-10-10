@@ -1,0 +1,34 @@
+# Secrets - never commit real API keys
+start_jarvis.bat
+JARVIS.vbs
+.env
+.env.*
+*.key
+
+# Runtime data
+data/
+*.mp3
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+dist/
+build/
+.eggs/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+Thumbs.db
+.DS_Store
+desktop.ini
+
+# Logs
+*.log

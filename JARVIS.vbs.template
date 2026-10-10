@@ -1,0 +1,27 @@
+' ============================================
+' JARVIS Launcher Template
+' Copy this file to JARVIS.vbs and add your
+' own API key below.
+' ============================================
+
+Set WshShell = CreateObject("WScript.Shell")
+Set fso = CreateObject("Scripting.FileSystemObject")
+
+strPath = fso.GetParentFolderName(WScript.ScriptFullName)
+
+' Get a free NVIDIA API key at https://build.nvidia.com/
+WshShell.Environment("PROCESS")("JARVIS_API_KEY") = "YOUR_API_KEY_HERE"
+WshShell.Environment("PROCESS")("JARVIS_BASE_URL") = "https://integrate.api.nvidia.com/v1"
+WshShell.Environment("PROCESS")("JARVIS_MODEL") = "nvidia/nemotron-3-super-120b-a12b"
+
+' Check if server is already running
+Set executor = WshShell.Exec("cmd /c netstat -ano | findstr :8765 | findstr LISTENING")
+result = executor.StdOut.ReadAll()
+If InStr(result, "8765") > 0 Then
+    WshShell.Run "cmd /c start msedge --app=http://127.0.0.1:8765/ --window-size=1280,860", 0, False
+Else
+    WshShell.CurrentDirectory = strPath
+    WshShell.Run "cmd /c python run.py --no-browser", 0, False
+    WScript.Sleep 3000
+    WshShell.Run "cmd /c start msedge --app=http://127.0.0.1:8765/ --window-size=1280,860", 0, False
+End If
